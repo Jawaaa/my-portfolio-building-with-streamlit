@@ -14,9 +14,23 @@ st.set_page_config(
 )
 
 st.sidebar.title("📌 Navigasi Portofolio")
+
+# UPDATE: variabel perantara buat nampung "tujuan" pindah halaman dari tombol lain
+if "nav_target" not in st.session_state:
+    st.session_state.nav_target = None
+
+# UPDATE: proses perpindahan ini dilakukan SEBELUM widget radio dibuat
+if st.session_state.nav_target is not None:
+    st.session_state.page = st.session_state.nav_target
+    st.session_state.nav_target = None
+
+if "page" not in st.session_state:
+    st.session_state.page = "Tentang Saya"
+
 page = st.sidebar.radio(
     "Pilih Halaman:",
-    ["Tentang Saya", "Proyek Saya", "Cek & Visualisasi Data (EDA)", "Prediksi Model (.pkl)"]
+    ["Tentang Saya", "Proyek Saya", "Cek & Visualisasi Data (EDA)", "Prediksi Model (.pkl)"],
+    key="page"
 )
 
 # Loader (dengan cache) untuk memuat model dan data
@@ -119,7 +133,11 @@ elif page == "Proyek Saya":
 
                 if proj["github"]:
                     st.link_button("🔗 Lihat di GitHub", proj["github"])
-
+                else:
+                    if st.button("📊 Lihat EDA & Prediksi", key=f"goto_{proj['title']}"):
+                        st.session_state.nav_target = "Cek & Visualisasi Data (EDA)"   # UPDATE: bukan .page langsung
+                        st.rerun()
+                        
 # EDA + Visualization Performa Model page
 elif page == "Cek & Visualisasi Data (EDA)":
     st.title("📊 Eksplorasi & Visualisasi Data")
