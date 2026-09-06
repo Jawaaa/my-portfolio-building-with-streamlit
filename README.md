@@ -40,10 +40,15 @@ my-portfolio-with-streamlit/
 
 
 ├── app.py # Aplikasi Streamlit utama
+
 ├── train_model.py # Script training pipeline ML
+
 ├── requirements.txt # Daftar dependency
+
 ├── data/ # Dataset (train.csv, test.csv, house_prices_sample.csv)
+
 ├── models/ # Model & metrics hasil training (models.pkl, metrics.pkl)
+
 └── assets/ # Gambar profil & proyek
 
 
