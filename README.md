@@ -37,6 +37,8 @@ Pipeline training ada di [`train_model.py`](train_model.py), hasilnya disimpan s
 
 ## 📁 Struktur Project
 my-portfolio-with-streamlit/
+
+
 ├── app.py # Aplikasi Streamlit utama
 ├── train_model.py # Script training pipeline ML
 ├── requirements.txt # Daftar dependency
